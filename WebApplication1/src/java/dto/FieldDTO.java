@@ -22,11 +22,11 @@ public class FieldDTO {
     private Date updateAt;
     private double price;
     private int rating;
-    
+    private String fieldSize;
     public FieldDTO() {
     }
 
-    public FieldDTO(String fieldID, String fieldName, String decription, String location, String imageURL, String amentities, Date createdAt, Date updateAt, double price, int rating) {
+    public FieldDTO(String fieldID, String fieldName, String decription, String location, String imageURL, String amentities, Date createdAt, Date updateAt, double price, int rating, String fieldSize) {
         this.fieldID = fieldID;
         this.fieldName = fieldName;
         this.decription = decription;
@@ -37,8 +37,18 @@ public class FieldDTO {
         this.updateAt = updateAt;
         this.price = price;
         this.rating = rating;
+        this.fieldSize = fieldSize;
     }
 
+    public String getFieldSize() {
+        return fieldSize;
+    }
+
+    public void setFieldSize(String fieldSize) {
+        this.fieldSize = fieldSize;
+    }
+
+    
     
 
     
@@ -127,8 +137,10 @@ public class FieldDTO {
 
     @Override
     public String toString() {
-        return "FieldDTO{" + "fieldID=" + fieldID + ", fieldName=" + fieldName + ", decription=" + decription + ", location=" + location + ", imageURL=" + imageURL + ", amentities=" + amentities + ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", price=" + price + ", rating=" + rating + '}';
+        return "FieldDTO{" + "fieldID=" + fieldID + ", fieldName=" + fieldName + ", decription=" + decription + ", location=" + location + ", imageURL=" + imageURL + ", amentities=" + amentities + ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", price=" + price + ", rating=" + rating + ", fieldSize=" + fieldSize + '}';
     }
+
+    
 
     
 

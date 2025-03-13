@@ -36,8 +36,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        
-        
+
         String action = request.getParameter("action");
 
         if (action == null || action.equals("list")) {
@@ -45,7 +44,7 @@ public class HomeController extends HttpServlet {
             List<FieldDTO> list = dao.getAllField();
             request.setAttribute("list", list);
             request.getRequestDispatcher("home.jsp").forward(request, response);
-        } else if(action.equals("search")){
+        } else if (action.equals("search")) {
             String keyword = request.getParameter("location");
 
             if (keyword == null) {
@@ -57,10 +56,16 @@ public class HomeController extends HttpServlet {
             request.setAttribute("keyword", keyword);
             request.setAttribute("list", list);
             request.getRequestDispatcher("home.jsp").forward(request, response);
+        } else if (action.equals("details")) {
+
+            String id = request.getParameter("id");
+            DAO dao = new DAO();
+            FieldDTO c = dao.getDetail(id);
+
+            request.setAttribute("detail", c);
+            request.getRequestDispatcher("details.jsp").forward(request, response);
         }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

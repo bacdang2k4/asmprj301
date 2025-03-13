@@ -22,7 +22,7 @@ public class DAO {
 
     public List<FieldDTO> getAllField() {
         List<FieldDTO> list = new ArrayList<>();
-        String sql = "SELECT FieldID, FieldName, Price, ImageURL, [Location] FROM FOOTBALL_FIELD";
+        String sql = "SELECT FieldID, FieldName, Price, ImageURL, Location FROM FOOTBALL_FIELD";
 
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
@@ -51,7 +51,7 @@ public class DAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<FieldDTO> list = new ArrayList<>();
-        String sql = "SELECT FieldID, FieldName, Price, ImageURL, [Location] FROM FOOTBALL_FIELD WHERE Location LIKE ? ";
+        String sql = "SELECT FieldID, FieldName, Price, ImageURL, Location FROM FOOTBALL_FIELD WHERE Location LIKE ? ";
 
         try {
             conn = new DBUtils().getConnection();
@@ -76,5 +76,48 @@ public class DAO {
         }
 
         return list;
+    }
+
+    public FieldDTO getDetail(String id) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT [FieldName]\n"
+                + "      ,[Description]\n"
+                + "      ,[FieldSize]\n"
+                + "      ,[Location]\n"
+                + "      ,[ImageURL]\n"
+                + "      ,[Price]\n"
+                + "      ,[Amenities]\n"
+                + "      ,[FieldStatus]\n"
+                + "      ,[CreatedAt]\n"
+                + "      ,[UpdatedAt]\n"
+                + "  FROM [FootballFieldBooking].[dbo].[FOOTBALL_FIELD]\n"
+                + "  WHERE FieldID = ?";
+
+        try {
+            conn = new DBUtils().getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new FieldDTO(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7),
+                        rs.getDate(8),
+                        rs.getDouble(9),
+                        rs.getInt(10),
+                        rs.getString(11));
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 }

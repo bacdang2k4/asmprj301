@@ -11,48 +11,10 @@
     </head>
     <body>
         <!-- Header -->
-        <header>
-            <div class="container">
-                <div class="logo">
-                    <a href="index.jsp">
-                        <img style="width: 150px; height: 95px"src="images/logo-removebg-preview.png" alt="PlaySoccerNow Logo">
-                        <span>PlaySoccerNow</span>
-                    </a>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="index.jsp">Home</a></li>
-                        <li><a href="about.jsp">About Us</a></li>
-                        <li><a href="contact.jsp">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="user-actions">
-                    <c:choose>
-                        <c:when test="${empty sessionScope.user}">
-                            <a href="login.jsp" class="btn btn-outline">Login</a>
-                            <a href="register.jsp" class="btn btn-primary">Register</a>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="user-menu">
-                                <span>${sessionScope.user.username} <i class="fas fa-chevron-down"></i></span>
-                                <div class="dropdown">
-                                    <a href="profile.jsp"><i class="fas fa-user"></i> My Profile</a>
-                                    <a href="bookings.jsp"><i class="fas fa-calendar-check"></i> My Bookings</a>
-                                    <c:if test="${sessionScope.user.role eq 'FIELD_OWNER'}">
-                                        <a href="revenue.jsp"><i class="fas fa-chart-line"></i> Revenue</a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                                        <a href="admin/dashboard.jsp"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
-                                    </c:if>
-                                    <a href="logout" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                                </div>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-        </header>
-
+        
+        <jsp:include page="header.jsp" />
+        
+        <link rel="stylesheet" href="css/styleindex.css">
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
@@ -60,7 +22,7 @@
                     <h1>Find and Book Soccer Fields</h1>
                     <p>The easiest way to find available soccer fields near you</p>
                     <div class="search-container">
-                        <form action="search" method="get">
+                        <form action="./home" method="get">
                             <div class="search-box">
                                 <input type="text" name="location" placeholder="Enter your location" value="${keyword}">
                                 <input type=hidden name="action" value="search">
@@ -109,7 +71,7 @@
                                         </c:choose>
                                     </span>
                                 </p>
-                                <a href="field-details?id=${field.fieldID}" class="btn btn-secondary">View Details</a>
+                                <a href="home?id=${field.fieldID}&action=details" class="btn btn-secondary">View Details</a>
                             </div>
                         </div>
                     </c:forEach>
@@ -191,58 +153,9 @@
         </section>
 
         <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo">
-                        <img src="images/logo.png" alt="PlaySoccerNow Logo">
-                        <span>PlaySoccerNow</span>
-                        <p>The easiest way to find and book soccer fields.</p>
-                    </div>
-                    <div class="footer-links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><a href="index.jsp">Home</a></li>
-                            <li><a href="about.jsp">About Us</a></li>
-                            <li><a href="contact.jsp">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links">
-                        <h3>For Users</h3>
-                        <ul>
-                            <li><a href="login.jsp">Login</a></li>
-                            <li><a href="register.jsp">Register</a></li>
-                            <li><a href="how-to-book.jsp">How to Book</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links">
-                        <h3>For Field Owners</h3>
-                        <ul>
-                            <li><a href="owner-register.jsp">Register as Owner</a></li>
-                            <li><a href="owner-guide.jsp">Owner Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-contact">
-                        <h3>Contact Us</h3>
-                        <p><i class="fas fa-envelope"></i> info@playsoccernow.com</p>
-                        <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/su.pin.3950/"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2025 PlaySoccerNow. All rights reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="terms.jsp">Terms of Service</a>
-                        <a href="privacy.jsp">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="footer.jsp" />
+
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/main.js"></script>
