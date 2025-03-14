@@ -7,6 +7,7 @@ package dao;
 
 import DBconnection.DBUtils;
 import dto.FieldDTO;
+import dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -119,5 +120,57 @@ public class DAO {
 
         }
         return null;
+    }
+    
+    public UserDTO login(String username, String password){
+        
+        UserDTO user = null;
+        try {
+
+                Connection con = DBUtils.getConnection();            
+                String sql = " SELECT Username FROM USERS ";
+                sql += " WHERE Username = ?  AND Password = ?";
+                               
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                
+                ResultSet rs = stmt.executeQuery();
+                
+                if (rs != null){
+                    if (rs.next()){
+                        
+                        user = new UserDTO();                        
+                        user.setUserName(rs.getString("username"));                      
+                    }
+                }
+                con.close();
+            } catch (Exception e) {                
+                
+                
+            }
+            return user; 
+    }
+    
+    public Boolean signup(String userId, String userName, String email, String password, String address) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "INSERT INTO USERS VALUES(?,?,?,?,?,?) ";
+
+        try {
+            conn = new DBUtils().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, userId);
+            ps.setString(2, userName);
+            ps.setString(3, "Customer");
+            ps.setString(4, email);
+            ps.setString(5, password);
+            ps.setString(6, address);
+            
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+        }
+        return false;
     }
 }

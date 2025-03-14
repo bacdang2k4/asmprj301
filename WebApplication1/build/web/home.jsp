@@ -142,15 +142,7 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Own a Soccer Field?</h2>
-                    <p>Join our platform and start earning by renting out your field</p>
-                    <a href="owner-register.jsp" class="btn btn-primary">Register as Field Owner</a>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Footer -->
         <jsp:include page="footer.jsp" />

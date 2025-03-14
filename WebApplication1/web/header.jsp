@@ -33,7 +33,6 @@
                     <c:choose>
                         <c:when test="${empty sessionScope.user}">
                             <a href="login.jsp" class="btn btn-outline">Login</a>
-                            <a href="register.jsp" class="btn btn-primary">Register</a>
                         </c:when>
                         <c:otherwise>
                             <div class="user-menu">
@@ -41,13 +40,13 @@
                                 <div class="dropdown">
                                     <a href="profile.jsp"><i class="fas fa-user"></i> My Profile</a>
                                     <a href="bookings.jsp"><i class="fas fa-calendar-check"></i> My Bookings</a>
-                                    <c:if test="${sessionScope.user.role eq 'FIELD_OWNER'}">
+                                    <c:if test="${sessionScope.usersession.role eq 'ADMIN'}">
                                         <a href="revenue.jsp"><i class="fas fa-chart-line"></i> Revenue</a>
                                     </c:if>
-                                    <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                                    <c:if test="${sessionScope.usersession.role eq 'ADMIN'}">
                                         <a href="admin/dashboard.jsp"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
                                     </c:if>
-                                    <a href="logout" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                    <a href="home?action=logout" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                                 </div>
                             </div>
                         </c:otherwise>
