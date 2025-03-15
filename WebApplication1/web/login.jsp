@@ -31,7 +31,6 @@
             <div class="registration form">
                 <header>Signup</header>
                 <form action="./home" method="get">
-                    <input type="text" name="userid" placeholder="Enter your id">
                     <input type="text" name="user" placeholder="Enter your user name">
                     <input type="text" name="email" placeholder="Enter your email">
                     <input type="text" name="address" placeholder="Enter your address">

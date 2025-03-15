@@ -40,8 +40,17 @@ public class HomeController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
-
-        if (action == null || action.equals("list")) {
+        if (action == null) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+            DAO dao = new DAO();
+            List<FieldDTO> list = dao.getAllField();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }else if(action.equals("list")) {
+            
             DAO dao = new DAO();
             List<FieldDTO> list = dao.getAllField();
             request.setAttribute("list", list);
@@ -90,13 +99,15 @@ public class HomeController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
 
         } else if (action.equals("signup")) {
-            String userid = request.getParameter("userid");
+            
+            
             String username = request.getParameter("user");
             String password = request.getParameter("pass");
             String address = request.getParameter("address");
             String email = request.getParameter("email");
 
             DAO dao = new DAO();
+            int userid = dao.getMaxId() +1;
             boolean success = dao.signup(userid, username, email, password, address);
 
             if (success) {
@@ -106,7 +117,7 @@ public class HomeController extends HttpServlet {
                 request.setAttribute("error", "Đăng ký thất bại! Vui lòng thử lại.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

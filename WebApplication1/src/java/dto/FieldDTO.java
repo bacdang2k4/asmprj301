@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author bacda
  */
 public class FieldDTO {
-    private String fieldID;
+    private int fieldID;
     private String fieldName;
     private String decription;
     private String location;
@@ -23,10 +23,11 @@ public class FieldDTO {
     private double price;
     private int rating;
     private String fieldSize;
+
     public FieldDTO() {
     }
 
-    public FieldDTO(String fieldID, String fieldName, String decription, String location, String imageURL, String amentities, Date createdAt, Date updateAt, double price, int rating, String fieldSize) {
+    public FieldDTO(int fieldID, String fieldName, String decription, String location, String imageURL, String amentities, Date createdAt, Date updateAt, double price, int rating, String fieldSize) {
         this.fieldID = fieldID;
         this.fieldName = fieldName;
         this.decription = decription;
@@ -40,28 +41,13 @@ public class FieldDTO {
         this.fieldSize = fieldSize;
     }
 
-    public String getFieldSize() {
-        return fieldSize;
-    }
-
-    public void setFieldSize(String fieldSize) {
-        this.fieldSize = fieldSize;
-    }
-
-    
-    
-
-    
-    
-    public String getFieldID() {
+    public int getFieldID() {
         return fieldID;
     }
 
-    public void setFieldID(String FieldID) {
-        this.fieldID = FieldID;
+    public void setFieldID(int fieldID) {
+        this.fieldID = fieldID;
     }
-
-    
 
     public String getFieldName() {
         return fieldName;
@@ -135,11 +121,19 @@ public class FieldDTO {
         this.rating = rating;
     }
 
+    public String getFieldSize() {
+        return fieldSize;
+    }
+
+    public void setFieldSize(String fieldSize) {
+        this.fieldSize = fieldSize;
+    }
+
     @Override
     public String toString() {
         return "FieldDTO{" + "fieldID=" + fieldID + ", fieldName=" + fieldName + ", decription=" + decription + ", location=" + location + ", imageURL=" + imageURL + ", amentities=" + amentities + ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", price=" + price + ", rating=" + rating + ", fieldSize=" + fieldSize + '}';
     }
-
+ 
     
 
     

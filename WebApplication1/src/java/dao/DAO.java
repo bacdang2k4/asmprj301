@@ -152,7 +152,7 @@ public class DAO {
             return user; 
     }
     
-    public Boolean signup(String userId, String userName, String email, String password, String address) {
+    public Boolean signup(int userId, String userName, String email, String password, String address) {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -161,7 +161,7 @@ public class DAO {
         try {
             conn = new DBUtils().getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, userId);
+            ps.setInt(1, userId);
             ps.setString(2, userName);
             ps.setString(3, "Customer");
             ps.setString(4, email);
@@ -172,5 +172,21 @@ public class DAO {
         } catch (Exception e) {
         }
         return false;
+    }
+    
+    public int getMaxId() {
+        int maxId = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT MAX(UserID) FROM USERS";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                maxId = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+        }
+        return maxId;
     }
 }
