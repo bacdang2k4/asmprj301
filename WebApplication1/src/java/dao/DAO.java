@@ -31,7 +31,7 @@ public class DAO {
 
             while (rs.next()) {
                 FieldDTO dto = new FieldDTO();
-                dto.setFieldID(rs.getString("FieldID"));  // Truy cập bằng tên cột
+                dto.setFieldID(rs.getInt("FieldID"));  // Truy cập bằng tên cột
                 dto.setFieldName(rs.getString("FieldName"));
                 dto.setPrice(rs.getDouble("Price"));
                 dto.setImageURL(rs.getString("ImageURL"));
@@ -63,7 +63,7 @@ public class DAO {
 
             while (rs.next()) {
                 FieldDTO dto = new FieldDTO();
-                dto.setFieldID(rs.getString(1));
+                dto.setFieldID(rs.getInt(1));
                 dto.setFieldName(rs.getString(2));
                 dto.setPrice(rs.getDouble(3));
                 dto.setImageURL(rs.getString(4));
@@ -84,18 +84,7 @@ public class DAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT [FieldName]\n"
-                + "      ,[Description]\n"
-                + "      ,[FieldSize]\n"
-                + "      ,[Location]\n"
-                + "      ,[ImageURL]\n"
-                + "      ,[Price]\n"
-                + "      ,[Amenities]\n"
-                + "      ,[FieldStatus]\n"
-                + "      ,[CreatedAt]\n"
-                + "      ,[UpdatedAt]\n"
-                + "  FROM [FootballFieldBooking].[dbo].[FOOTBALL_FIELD]\n"
-                + "  WHERE FieldID = ?";
+        String sql = "select FieldID , FieldName , Description , FieldSize , Location , ImageURL, Amenities , Rating , Price , CreatedAt, UpdatedAt  from FOOTBALL_FIELD where FieldID = ?";
 
         try {
             conn = new DBUtils().getConnection();
@@ -104,54 +93,53 @@ public class DAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new FieldDTO(rs.getString(1),
+                return new FieldDTO(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getDate(7),
-                        rs.getDate(8),
+                        rs.getString(7),
+                        rs.getDate(10),
+                        rs.getDate(11),
                         rs.getDouble(9),
-                        rs.getInt(10),
-                        rs.getString(11));
+                        rs.getInt(8),
+                        rs.getString(4));
             }
         } catch (Exception e) {
 
         }
         return null;
     }
-    
-    public UserDTO login(String username, String password){
-        
+
+    public UserDTO login(String username, String password) {
+
         UserDTO user = null;
         try {
 
-                Connection con = DBUtils.getConnection();            
-                String sql = " SELECT Username FROM USERS ";
-                sql += " WHERE Username = ?  AND Password = ?";
-                               
-                PreparedStatement stmt = con.prepareStatement(sql);
-                stmt.setString(1, username);
-                stmt.setString(2, password);
-                
-                ResultSet rs = stmt.executeQuery();
-                
-                if (rs != null){
-                    if (rs.next()){
-                        
-                        user = new UserDTO();                        
-                        user.setUserName(rs.getString("username"));                      
-                    }
+            Connection con = DBUtils.getConnection();
+            String sql = " SELECT Username FROM USERS ";
+            sql += " WHERE Username = ?  AND Password = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                if (rs.next()) {
+
+                    user = new UserDTO();
+                    user.setUserName(rs.getString("username"));
                 }
-                con.close();
-            } catch (Exception e) {                
-                
-                
             }
-            return user; 
+            con.close();
+        } catch (Exception e) {
+
+        }
+        return user;
     }
-    
+
     public Boolean signup(int userId, String userName, String email, String password, String address) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -167,13 +155,13 @@ public class DAO {
             ps.setString(4, email);
             ps.setString(5, password);
             ps.setString(6, address);
-            
+
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
         }
         return false;
     }
-    
+
     public int getMaxId() {
         int maxId = 0;
         try {

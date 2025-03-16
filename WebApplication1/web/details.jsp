@@ -347,11 +347,11 @@
                             <h2 id="field-name">${detail.fieldName}</h2>
                             <div class="field-location">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span id="field-location">Location</span>
+                                <span id="field-location">${detail.location}</span>
                             </div>
                         </div>
                         <div class="field-price">
-                            <span id="field-price">0</span>/hour
+                            <span id="field-price">${detail.price}</span>/hour  
                         </div>
                     </div>
 
@@ -360,11 +360,11 @@
                             <h3>Field Details</h3>
                             <div class="detail-item">
                                 <strong>Field Size</strong>
-                                <p id="field-size">Standard</p>
+                                <p id="field-size">${detail.fieldSize}</p>
                             </div>
                             <div class="detail-item">
                                 <strong>Description</strong>
-                                <p id="field-description">This is a placeholder description for the soccer field.</p>
+                                <p id="field-description">${detail.decription}</p>
                             </div>
                         </div>
 
@@ -373,15 +373,16 @@
                             <div class="detail-item">
                                 <div id="amenities-list" class="amenities-list">
                                     <!-- Amenities will be added dynamically -->
+                                    <p id="field-description">${detail.amentities}</p>
                                 </div>
                             </div>
                             <div class="detail-item">
                                 <strong>Added</strong>
-                                <p id="field-created">January 1, 2025</p>
+                                <p id="field-created">${detail.createdAt}</p>
                             </div>
                             <div class="detail-item">
                                 <strong>Last Updated</strong>
-                                <p id="field-updated">March 13, 2025</p>
+                                <p id="field-updated">${detail.updateAt}</p>
                             </div>
                         </div>
                     </div>

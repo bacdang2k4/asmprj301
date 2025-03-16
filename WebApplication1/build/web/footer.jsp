@@ -18,14 +18,14 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-logo">
-                        <img src="images/logo.png" alt="PlaySoccerNow Logo">
+                        <img src="images/logo-removebg-preview.png" alt="PlaySoccerNow Logo">
                         <span>PlaySoccerNow</span>
                         <p>The easiest way to find and book soccer fields.</p>
                     </div>
                     <div class="footer-links">
                         <h3>Quick Links</h3>
                         <ul>
-                            <li><a href="index.jsp">Home</a></li>
+                            <li><a href="home.jsp">Home</a></li>
                             <li><a href="about.jsp">About Us</a></li>
                             <li><a href="contact.jsp">Contact</a></li>
                         </ul>
@@ -34,8 +34,7 @@
                         <h3>For Users</h3>
                         <ul>
                             <li><a href="login.jsp">Login</a></li>
-                            <li><a href="register.jsp">Register</a></li>
-                            <li><a href="how-to-book.jsp">How to Book</a></li>
+                            <li><a href="login.jsp">Register</a></li>
                         </ul>
                     </div>
                     <div class="footer-links">
